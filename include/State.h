@@ -65,14 +65,9 @@ class State {
 
         virtual void enter(T data) {
             if(!isSetup) setup();
-            //Serial.print(F("Entrando em: "));
-            //Serial.println(name);
         }
 
-        virtual void exit(T data) {
-            //Serial.print(F("Saindo de: "));
-            //Serial.println(name);
-        }
+        virtual void exit(T data) {}
 
         virtual void setup() {
             isSetup = true;

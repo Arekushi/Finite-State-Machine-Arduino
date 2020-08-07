@@ -3,18 +3,18 @@
     "version": "1.0.0",
     "description": "This is a state machine model, object oriented applied in C++ to be used in line tracking carts (Arduino UNO)",
     "keywords": "finite-state-machine, state-machine, state-management, arduino-uno, arduino, arduino-library, line-following, car, oop",
-    "repository":
-    {
-        "type": "git",
-        "url": "https://github.com/Arekushi/Finite-State-Machine-Arduino.git"
-    },
     "authors":
     {
         "name": "Alexandre Ferreira",
         "email": "alex.ferreiradelima64@gmail.com",
         "url": "https://www.linkedin.com/in/alex-ferreira/"
     },
+    "repository":
+    {
+        "type": "git",
+        "url": "https://github.com/Arekushi/Finite-State-Machine-Arduino.git"
+    },
     "license": "Apache License 2.0",
-    "frameworks": "Arduino",
-    "platforms": ["Atmel AVR", "Atmel megaAVR"]
+    "frameworks": "arduino",
+    "platforms": ["atmelavr", "atmelmegaavr"]
 }

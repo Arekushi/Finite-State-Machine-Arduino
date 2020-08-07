@@ -67,16 +67,16 @@ class State {
             if(!isSetup) setup();
         }
 
-        virtual void exit(T data) {}
+        virtual void exit(T data) = 0;
+        virtual void setActions() = 0;
+        virtual void setTransitions() = 0;
 
+    private:
         virtual void setup() {
             isSetup = true;
             setTransitions();
             setActions();
         }
-
-        virtual void setActions() = 0;
-        virtual void setTransitions() = 0;
 };
 
 #endif

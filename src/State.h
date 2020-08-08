@@ -29,6 +29,12 @@ class State {
             transitions = new ArrayList<Transition<T>>();
         }
 
+        State() {
+            isSetup = false;
+            actions = new ArrayList<Action<T>>();
+            transitions = new ArrayList<Transition<T>>(); 
+        }
+
         void addAction(Action<T> *action) {
             actions->addElement(action);
         }

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Finite State Machine for Arduino | Finite-State-Machine–Arduino-</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Finite State Machine for Arduino" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is a state machine model, object oriented applied in C++ to be used in line tracking carts (Arduino UNO)." />
+<meta property="og:description" content="This is a state machine model, object oriented applied in C++ to be used in line tracking carts (Arduino UNO)." />
+<link rel="canonical" href="http://localhost:4000/Finite-State-Machine-Arduino/" />
+<meta property="og:url" content="http://localhost:4000/Finite-State-Machine-Arduino/" />
+<meta property="og:site_name" content="Finite-State-Machine–Arduino-" />
+<script type="application/ld+json">
+{"@type":"WebSite","headline":"Finite State Machine for Arduino","url":"http://localhost:4000/Finite-State-Machine-Arduino/","name":"Finite-State-Machine–Arduino-","description":"This is a state machine model, object oriented applied in C++ to be used in line tracking carts (Arduino UNO).","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#157878">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="/Finite-State-Machine-Arduino/assets/css/style.css?v=d7bf5e3a221c1bf4e39959550a68befc01439317">
+</head>
+
+<body>
+  <header class="page-header" role="banner">
+    <nav class="navbar navbar-expand-sm navbar-dark">
+      <div class="collapse navbar-collapse d-flex justify-content-center flex-row" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Beginning</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Install</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">How to Use</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="banner">
+      <h1 class="project-name">Finite State Machine for Arduino</h1>
+      <h2 class="project-tagline">
+        This is a state machine model, object oriented applied in C++ to be used in line tracking carts (Arduino UNO).</h2>
+      
+      <a href="https://github.com/Arekushi/Finite-State-Machine--Arduino-" class="btn">View on GitHub</a>
+      
+      
+      <a href="https://github.com/Arekushi/Finite-State-Machine--Arduino-/zipball/gh-pages" class="btn">Download .zip</a>
+      
+    </div>
+  </header>
+
+  <main id="content" class="main-content" role="main">
+    <h2 id="the-beginning">The beginning</h2>
+
+<p>When developing for Arduino, focusing on a cart that was able to follow a predetermined line on the floor, I realized that when making structured code in C++ it was a bad thing, it was simpler to develop the logic, but in the long run I saw myself creating several ifs.</p>
+
+<center><img src="https://i.imgur.com/1AraF4i.jpg" height="300" /></center>
+
+<p>Yes, this meme represents well what I mean. I had to create checks for the sensors, <strong>all the time</strong>, and there were <strong>several</strong> so I can be sure that everything will go well.
+I missed the OOP classes, where we create objects and separate things in an organized way, here the code was linear and its ability to be messy was huge.</p>
+
+<center><img src="https://i.imgflip.com/3mqecd.jpg" width="400" /></center>
+
+<p>Such a code is difficult to maintain and confusing even for those who are programming, imagine for someone else outside the project.
+It is simpler to do, much simpler, but it is that programmer’s choice:</p>
+<ul>
+  <li><span style="color: #d43c2f"><strong>Make simple code to never mess with it later</strong></span></li>
+  <li><span style="color: #38ba47"><strong>Or make a code well done to be used later</strong></span></li>
+</ul>
+
+<p>Even if you try to modulate this by creating <strong>several methods</strong>, it will only increase the size of the code (which is included in just one .ino file), making the programmer have to hunt down the part of the code in which he has to perform maintenance.</p>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-content">
+      <div class="row align-items-center">
+        
+        <div class="col">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde accusantium blanditiis quia numquam assumenda, cum iure fuga laborum quae illo voluptate eaque, ipsam ea porro. Deserunt, cum illo. Eligendi, impedit.
+          <ul class="d-flex flex-row align-items-center justify-content-center list-unstyled links mt-4">
+            <li class="d-flex flex-column align-items-center">
+                <a target="_blank" href="https://twitter.com/Arekushii_" class="icon">
+                  <img src="assets/icons/Twitter.png">
+                </a>
+
+                <a target="_blank" href="https://twitter.com/Arekushii_">
+                  <p>@Arekushii_</p>
+                </a>
+            </li>
+
+            <li class="d-flex flex-column align-items-center">
+              <a target="_blank" href="https://www.linkedin.com/in/alex-ferreira/" class="icon">
+                <img src="assets/icons/LinkedIn.png">
+              </a>
+
+              <a target="_blank" href="https://www.linkedin.com/in/alex-ferreira/">
+                <p>alex-ferreira</p>
+              </a>
+            </li>
+
+            <li class="d-flex flex-column align-items-center">
+              <a target="_blank" href="https://github.com/Arekushi" class="icon">
+                <img src="assets/icons/Github.webp">
+              </a>
+
+              <a target="_blank" href="https://github.com/Arekushi">
+                <p>Arekushi</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col">
+          
+            <a target="_blank" href="https://github.com/Arekushi">
+              <img src="https://github.com/Arekushi.png" class="avatar">
+            </a>
+
+            <span class="site-footer-owner">
+              <a class="repos" target="_blank" href="https://github.com/Arekushi/Finite-State-Machine--Arduino-">Finite-State-Machine--Arduino-</a><br>
+              is maintained by <a class="owner" target="_blank" href="https://github.com/Arekushi">Arekushi</a>.
+            </span>
+          
+
+          <span class="site-footer-credits">This page was generated by
+            <a target="_blank" href="https://pages.github.com">GitHub Pages</a>.
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+    crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
+    crossorigin="anonymous">
+  </script>
+</body>
+
+</html>

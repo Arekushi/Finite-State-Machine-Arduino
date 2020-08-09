@@ -380,11 +380,11 @@ a {
 }
 
 .site-footer-credits a {
-  color: #202030;
+  color: white;
 }
 
 .site-footer-credits a:hover {
-  color: #202030;
+  color: white;
 }
 
 .icon {
@@ -419,15 +419,15 @@ a {
 .avatar {
   border-radius: 50%;
   width: 100px;
-  border: 3px solid #202030;
+  border: 3px solid white;
 }
 
 .owner {
-  color: #202030;
+  color: white;
 }
 
 .owner:hover {
-  color: #202030;
+  color: white;
 }
 
 .repos {
@@ -438,3 +438,21 @@ a {
   color: white;
 }
 
+.title {
+  font-weight: normal;
+  font-size: 2em;
+  color: #202030;
+}
+
+.stretched-link {
+  color: $section-headings-color;
+}
+
+.img-link {
+  border-radius: 0 30% 30% 0;
+  background-color: $header-bg-color;
+}
+
+.img-link img {
+  width: 50%;
+}

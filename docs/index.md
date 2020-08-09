@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: home
 title: Finite State Machine for Arduino
 description: This is a state machine model, object oriented applied in C++ to be used in line tracking carts (Arduino UNO).
 ---
@@ -8,12 +8,16 @@ description: This is a state machine model, object oriented applied in C++ to be
 
 When developing for Arduino, focusing on a cart that was able to follow a predetermined line on the floor, I realized that when making structured code in C++ it was a bad thing, it was simpler to develop the logic, but in the long run I saw myself creating several ``ifs``.
 
-<center><img src="https://i.imgur.com/1AraF4i.jpg" height="300"></center>
+<div class="text-center mt-1 mb-2">
+    <img src="https://i.imgur.com/1AraF4i.jpg" alt="If statement meme" title="If statement meme" height="300">
+</div>
 
 Yes, this meme represents well what I mean. I had to create checks for the sensors, **all the time**, and there were **several** so I can be sure that everything will go well.
 I missed the OOP classes, where we create objects and separate things in an organized way, here the code was linear and its ability to be messy was huge.
 
-<center><img src="https://i.imgflip.com/3mqecd.jpg" width="400"></center>
+<div class="text-center mb-2">
+    <img src="https://i.imgflip.com/3mqecd.jpg" alt="Understand code meme" title="Understand code meme" width="400">
+</div>
 
 Such a code is difficult to maintain and confusing even for those who are programming, imagine for someone else outside the project.
 It is simpler to do, much simpler, but it is that programmer's choice:
@@ -34,7 +38,9 @@ Which is true, giving an example, while the cart is moving forward, I wish it to
 
 And thinking about it, I studied the State Design Partner, or **State Machine** for some, and in it we have the concept that something will have a number of states and in those states it must perform determined or even unique behaviors, making transitions between states.
 
-<center><img src="https://www.itemis.com/hubfs/yakindu/statechart-tools/documentation/images/overview_simple_moore.jpg" width="400"></center>
+<div class="text-center">
+    <img src="https://www.itemis.com/hubfs/yakindu/statechart-tools/documentation/images/overview_simple_moore.jpg" alt="Buton State Machine" title="Buton State Machine" width="400">
+</div>
 
 In this simple example we have a button, and in this we can only have 2 possible states: 
 <span style="color: #38ba47">**On**</span> and 

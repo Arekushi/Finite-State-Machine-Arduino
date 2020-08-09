@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: home
 title: Another page
 description: This is just another page
 ---

@@ -1,124 +1,23 @@
 ---
 layout: default
-show_downloads: false
+title: Finite State Machine for Arduino
+description: This is a state machine model, object oriented applied in C++ to be used in line tracking carts (Arduino UNO).
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+## The beginning
 
-[Link to another page](./another-page.html).
+When developing for Arduino, focusing on a cart that was able to follow a predetermined line on the floor, I realized that when making structured code in C++ it was a bad thing, it was simpler to develop the logic, but in the long run I saw myself creating several ifs.
 
-There should be whitespace between paragraphs.
+<center><img src="https://i.imgur.com/1AraF4i.jpg" height="300"></center>
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+Yes, this meme represents well what I mean. I had to create checks for the sensors, **all the time**, and there were **several** so I can be sure that everything will go well.
+I missed the OOP classes, where we create objects and separate things in an organized way, here the code was linear and its ability to be messy was huge.
 
-# Header 1
+<center><img src="https://i.imgflip.com/3mqecd.jpg" width="400"></center>
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+Such a code is difficult to maintain and confusing even for those who are programming, imagine for someone else outside the project.
+It is simpler to do, much simpler, but it is that programmer's choice:
+- <span style="color: #d43c2f">**Make simple code to never mess with it later**</span>
+- <span style="color: #38ba47">**Or make a code well done to be used later**</span>
 
-## Header 2
-
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
-
-### Header 3
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
-
-#### Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
-```
+Even if you try to modulate this by creating **several methods**, it will only increase the size of the code (which is included in just one .ino file), making the programmer have to hunt down the part of the code in which he has to perform maintenance.

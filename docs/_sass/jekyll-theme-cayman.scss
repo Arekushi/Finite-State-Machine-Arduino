@@ -110,17 +110,19 @@ a {
   text-align: center;
   background-color: $header-bg-color;
   background-image: linear-gradient(120deg, $header-bg-color-secondary, $header-bg-color);
+}
 
+.banner {
   @include large {
-    padding: 5rem 6rem;
+    padding: 2.5rem 5rem 6rem;
   }
 
   @include medium {
-    padding: 3rem 4rem;
+    padding: 1.5rem 3rem 4rem;
   }
 
   @include small {
-    padding: 2rem 1rem;
+    padding: 1rem 2rem 1rem;
   }
 }
 
@@ -351,20 +353,24 @@ a {
 }
 
 .site-footer {
-  padding-top: 2rem;
-  margin-top: 2rem;
-  border-top: solid 1px $hr-border-color;
+  text-align: center;
+  color: $header-heading-color;
+  background-color: $header-bg-color;
+  background-image: linear-gradient(120deg, $header-bg-color-secondary, $header-bg-color);
+}
+
+.site-footer-content {
 
   @include large {
-    font-size: 1rem;
+    padding: 2.5rem 2.5rem
   }
 
   @include medium {
-    font-size: 1rem;
+    padding: 1.5rem 1.5rem;
   }
 
   @include small {
-    font-size: 0.9rem;
+    padding: 1rem 1rem;
   }
 }
 
@@ -373,6 +379,62 @@ a {
   font-weight: bold;
 }
 
-.site-footer-credits {
-  color: $blockquote-text-color;
+.site-footer-credits a {
+  color: #202030;
 }
+
+.site-footer-credits a:hover {
+  color: #202030;
+}
+
+.icon {
+  width: 50px;
+}
+
+.icon img {
+  width: 100%;
+}
+
+.links {
+  margin-bottom: 0;
+}
+
+.links p {
+  margin: 0;
+}
+
+.links li {
+  padding: 5px 15px;
+}
+
+.links a {
+  text-decoration: none;
+  color: white;
+}
+
+.links a:hover {
+  color: white;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 100px;
+  border: 3px solid #202030;
+}
+
+.owner {
+  color: #202030;
+}
+
+.owner:hover {
+  color: #202030;
+}
+
+.repos {
+  color: white;
+}
+
+.repos:hover {
+  color: white;
+}
+

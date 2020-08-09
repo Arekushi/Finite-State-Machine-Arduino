@@ -1,7 +1,6 @@
-title: Cayman theme
-description: Cayman is a clean, responsive theme for GitHub Pages.
+title: Finite State Machine
+description: Finite State Machine
 show_downloads: true
-google_analytics:
 theme: jekyll-theme-cayman
 baseurl: "/Finite-State-Machine-Arduino"
 url: "https://arekushi.github.io"

@@ -1,6 +1,6 @@
 {
     "name": "Finite-State-Machine-Arduino",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "This is a state machine model, object oriented applied in C++ to be used in line tracking carts (Arduino UNO)",
     "keywords": "finite-state-machine, state-machine, state-management, arduino-uno, arduino, arduino-library, line-following, car, oop",
     "authors":

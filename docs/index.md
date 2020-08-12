@@ -66,19 +66,3 @@ if(isSensor) {
 To get around this I created this State Machine model that is able to solve this problem and bring **modularity** to your code, being able to **reuse** and **easy to maintain**.
 
 This is my project, for more information about, follow the link below for the article about the installation.
-
-<!-- Next Post -->
-<div class="row">
-    <div class="col-md-12">
-        <div class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="col border p-4 d-flex flex-column position-static">
-                <strong class="d-inline-block mb-2 title">Install...</strong>
-                <p class="card-text mb-auto">In this article we will see how to install the package and know some concepts for using it.</p>
-                <a href="another-page.html" class="stretched-link">Continue reading</a>
-            </div>
-            <a href="#" class="col-3 img-link d-none d-md-flex align-items-center justify-content-center">
-                <img src="assets/icons/install-icon.png">
-            </a>
-        </div>
-    </div>
-</div>

@@ -114,11 +114,11 @@ a {
 
 .banner {
   @include large {
-    padding: 2.5rem 5rem 6rem;
+    padding: 2.5rem 5rem 3rem;
   }
 
   @include medium {
-    padding: 1.5rem 3rem 4rem;
+    padding: 1.5rem 3rem 2rem;
   }
 
   @include small {

@@ -18,10 +18,10 @@
       <div class="collapse navbar-collapse d-flex justify-content-center flex-row" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="index.html">Home</a>
+            <a class="nav-link" href="index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="install.html">Install</a>
+            <a class="nav-link active" href="install.html">Install</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">How to Use</a>
@@ -37,14 +37,6 @@
       <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
       <h2 class="project-tagline">
         {{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
-      {% if site.github.is_project_page %}
-      <a target="_blank" href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
-      {% endif %}
-      {% if site.show_downloads %}
-      <a target="_blank" href="https://platformio.org/lib/show/10976/Finite-State-Machine-Arduino" class="btn">View on
-        Platform.io</a>
-      <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
-      {% endif %}
     </div>
   </header>
 
@@ -57,9 +49,9 @@
               <div class="col border p-4 d-flex flex-column position-static">
                   <strong class="d-inline-block mb-2 title">Install...</strong>
                   <p class="card-text mb-auto">In this article we will see how to install the package and know some concepts for using it.</p>
-                  <a href="install.html" class="stretched-link">Continue reading</a>
+                  <a href="another-page.html" class="stretched-link">Continue reading</a>
               </div>
-              <a href="install.html" class="col-3 img-link d-none d-md-flex align-items-center justify-content-center">
+              <a href="#" class="col-3 img-link d-none d-md-flex align-items-center justify-content-center">
                   <img src="assets/icons/install-icon.png">
               </a>
           </div>

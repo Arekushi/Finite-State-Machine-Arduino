@@ -2,3 +2,5 @@
 .vscode
 include
 platformio.ini
+docs
+src

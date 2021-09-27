@@ -13,39 +13,49 @@ class ArrayList {
         /**
          * Our generic type array.
          */
-        T **data = new T*[0];
+        T **m_data = new T*[0];
 
         /**
          * Size of our list.
          */
-        byte length = 0;
+        byte m_length = 0;
 
     public:
+        ArrayList() { }
+
+        ArrayList(T *elements[], byte size) {
+            for(byte i = 0; i < size; i++) {
+                add(elements[i]);
+            }
+        }
+
         /**
          * Responsible method for adding one more element to our list.
          * 
          * @param[out] element is a generic pointer that will be added to the list.
          */
-        void addElement(T *element) {
-            T **newData = new T*[length+1];
+        void add(T *element) {
+            T **newData = new T*[m_length + 1];
 
-            for(byte i = 0; i < length; i++) {
-                newData[i] = data[i];
+            for(byte i = 0; i < m_length; i++) {
+                newData[i] = m_data[i];
             }
 
-            newData[length] = element;
-            delete[] data;
-            data = newData;
-            length++;
+            newData[m_length] = element;
+            delete[] m_data;
+            m_data = newData;
+            m_length++;
         }
+
+        void remove(int *behavior) { }
 
         /**
          * Get method for the size of our list.
          * 
          * @return Returns the size of our list.
          */
-        byte getLength() {
-            return length;
+        byte length() {
+            return m_length;
         }
 
         /**
@@ -53,8 +63,45 @@ class ArrayList {
          * 
          * @return Returns our array of pointers of a generic type.
          */
-        T **getArray() {
-            return data;
+        T **data() {
+            return m_data;
+        }
+
+        /**
+         * Clear our list.
+         */
+        void clear() {
+            delete[] m_data;
+            m_data = new T*[0];
+            m_length = 0;
+        }
+
+        byte indexOf(T *element) {
+            for(byte i = 0; i < m_length; i++) {
+                if(m_data[i] == element) {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        bool has(T *element) {
+            for(byte i = 0; i < m_length; i++) {
+                if(m_data[i] == element) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        bool any() {
+            return m_length > 0;
+        }
+
+        bool isEmpty() {
+            return m_length == 0;
         }
 };
 

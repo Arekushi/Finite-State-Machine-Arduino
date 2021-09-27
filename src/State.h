@@ -12,7 +12,7 @@
 /**
  * Class referring to a state of an object.
  * 
- * Abstract class, to create States for a given object, 
+ * Abstract class, to create States for a given object,
  * having a set of actions and transitions itself.
  * 
  * @tparam T It is the type of our object that has State Machine.
@@ -29,7 +29,7 @@ class State {
          * Boolean to verify that this state has already 
          * been configured with its actions and transitions.
          */
-        bool isSetup;
+        bool hasSetup;
 
         /**
          * ArrayList of actions that this state has.
@@ -53,7 +53,7 @@ class State {
          * @param[out] name is a char array assigned to the state name.
          */
         State(const char *name) : name(name) {
-            isSetup = false;
+            hasSetup = false;
             actions = new ArrayList<Action<T>>();
             transitions = new ArrayList<Transition<T>>();
         }
@@ -62,7 +62,7 @@ class State {
          * State Constructor
          */
         State() {
-            isSetup = false;
+            hasSetup = false;
             actions = new ArrayList<Action<T>>();
             transitions = new ArrayList<Transition<T>>(); 
         }
@@ -74,7 +74,7 @@ class State {
          * @param[out] pointer of an action<T> to be added to a state.
          */
         void addAction(Action<T> *action) {
-            actions->addElement(action);
+            actions->add(action);
         }
 
         /**
@@ -84,19 +84,19 @@ class State {
          * @param[out] pointer of an transition<T> to be added to a state.
          */
         void addTransition(Transition<T> *transition) {
-            transitions->addElement(transition);
+            transitions->add(transition);
         }
 
         /**
          * Method to perform all actions that the state has.
          * 
-         * @param[out] data It is a reference to the class that owns the State Machine.
+         * @param[out] machine It is a reference to the State Machine<T>.
          */
-        void executeAction(T &data) {
-            Action<T> **array = actions->getArray();
+        void executeAction(StateMachine<T> &machine) {
+            Action<T> **array = actions->data();
 
-            for(byte i = 0; i < actions->getLength(); i++) {
-                array[i]->execute(data);
+            for(byte i = 0; i < actions->length(); i++) {
+                array[i]->execute(machine.data);
             }
         }
 
@@ -108,14 +108,12 @@ class State {
          * @param[out] machine It is a reference to the State Machine<T>.
          */
         void checkTransitions(StateMachine<T> &machine) {
-            Transition<T> **array = transitions->getArray();
+            Transition<T> **array = transitions->data();
 
-            for(byte i = 0; i < transitions->getLength(); i++) {
-                if(array[i]->getDecision()->decision(machine.data)) {
-                    machine.transitionNextState(array[i]->getTrueState());
-
-                } else {
-                    machine.transitionNextState(array[i]->getFalseState());
+            for(byte i = 0; i < transitions->length(); i++) {
+                if(isCurrentBehavior(array[i], machine)) {
+                    const bool result = array[i]->getDecision()->decision(machine.data);
+                    machine.transitionNextState(array[i]->getState(result));
                 }
             }
         }
@@ -129,7 +127,7 @@ class State {
          * @param[out] machine It is a reference to the State Machine<T>.
          */
         void executeState(StateMachine<T> &machine) {
-            executeAction(machine.data);
+            executeAction(machine);
             checkTransitions(machine);
         }
 
@@ -137,7 +135,9 @@ class State {
          * Virtual method for when he enters this state, perform specific actions for him.
          */
         virtual void enter(T data) {
-            if(!isSetup) setup();
+            if(!hasSetup) {
+                setup();
+            }
         }
 
         /**
@@ -160,9 +160,13 @@ class State {
          * Method for configuring actions and transitions.
          */
         void setup() {
-            isSetup = true;
+            hasSetup = true;
             setTransitions();
             setActions();
+        }
+
+        bool isCurrentBehavior(Transition<T> *transition, StateMachine<T> &machine) {
+            return transition->behaviors->has(machine.currentBehavior);
         }
 };
 

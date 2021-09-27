@@ -19,7 +19,7 @@ class StateMachine {
          * Pointer of the current state of the object that has State Machine.
          */
         State<T> *currentState;
-
+        
         //State<T> *previousState;
 
     public:
@@ -27,6 +27,8 @@ class StateMachine {
          * Reference to the instance of the object that owns this State Machine.
          */
         T &data;
+
+        int *currentBehavior;
 
         /**
          * State Machine constructor.
@@ -36,6 +38,7 @@ class StateMachine {
          * @param[out] initState object's initial state pointer.
          */
         StateMachine(T &data, State<T> *initState) : data(data) {
+            this->currentBehavior = 0;
             currentState = initState;
             currentState->enter(this->data);
         }
@@ -87,6 +90,10 @@ class StateMachine {
             if(nextState != nullptr) {
                 setCurrentState(nextState);
             }
+        }
+
+        void updateBehavior(int *behavior) {
+            currentBehavior = behavior;
         }
 };
 

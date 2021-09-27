@@ -34,6 +34,23 @@ class Singleton {
 
             return instance;
         }
+
+        /**
+         * Get method to get just one instance of our T class.
+         * 
+         * @tparam T is the class about args.
+         * @param[out] args is a generic pointer which will be passed as 
+         *  an argument to the constructor of our class T.
+         * @return Returns a pointer with the instance of our generic parameter T.
+         */
+        template<typename A>
+        static T *getInstance(A *args) {
+            if(instance == nullptr) {
+                instance = new T(args);
+            }
+
+            return instance;
+        }
 };
 
 template<class T>

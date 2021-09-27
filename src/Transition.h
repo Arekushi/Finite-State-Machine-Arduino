@@ -1,6 +1,8 @@
 #ifndef Abstract_Transition_h
 #define Abstract_Transition_h
 
+#include <Monobehavior.h>
+
 template <class T> class State;
 template <class T> class Decision;
 
@@ -12,7 +14,7 @@ template <class T> class Decision;
  * @tparam T It is the type of our object that has State Machine.
  */
 template <class T>
-class Transition {
+class Transition : public Monobehavior {
     
     protected:
         /// Basic decision to which state we will go.
@@ -34,7 +36,13 @@ class Transition {
          * @param[out] trueState pointer of state<T> in case the decision returns true.
          * @param[out] falseState pointer of state<T> in case the decision returns false.
          */
-        Transition(Decision<T> *decision, State<T> *trueState, State<T> *falseState) {
+        Transition(Decision<T> *decision, State<T> *trueState, State<T> *falseState) : Monobehavior() {
+            this->decision = decision;
+            this->trueState = trueState;
+            this->falseState = falseState;
+        }
+
+        Transition(Decision<T> *decision, State<T> *trueState, State<T> *falseState, ArrayList<int> *behaviors) : Monobehavior(behaviors) {
             this->decision = decision;
             this->trueState = trueState;
             this->falseState = falseState;
@@ -50,21 +58,13 @@ class Transition {
         }
 
         /**
-         * Get method for true state.
+         * Get method for true or false state.
          * 
+         * @param type It is type about state [true or false].
          * @return Returns a pointer of state of a generic type.
          */
-        State<T> *getTrueState() {
-            return trueState;
-        }
-
-        /**
-         * Get method for false state.
-         * 
-         * @return Returns a pointer of state of a generic type.
-         */
-        State<T> *getFalseState() {
-            return falseState;
+        State<T> *getState(bool type) {
+            return type ? trueState : falseState;
         }
 };
 

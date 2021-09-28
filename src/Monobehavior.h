@@ -9,6 +9,7 @@ class Monobehavior {
 
         Monobehavior() {
             this->behaviors = new ArrayList<int>();
+            this->behaviors->add(0);
         }
 
         Monobehavior(ArrayList<int> *behaviors) {

@@ -26,12 +26,6 @@ class State {
         using base = State;
 
         /**
-         * Boolean to verify that this state has already 
-         * been configured with its actions and transitions.
-         */
-        bool hasSetup;
-
-        /**
          * ArrayList of actions that this state has.
          */
         ArrayList<Action<T>> *actions;
@@ -42,6 +36,12 @@ class State {
         ArrayList<Transition<T>> *transitions;
 
     public:
+        /**
+         * Boolean to verify that this state has already 
+         * been configured with its actions and transitions.
+         */
+        bool hasSetup;
+
         /**
          * Char array referring to the name of our state.
          */
@@ -65,6 +65,15 @@ class State {
             hasSetup = false;
             actions = new ArrayList<Action<T>>();
             transitions = new ArrayList<Transition<T>>(); 
+        }
+
+        /**
+         * Method for configuring actions and transitions.
+         */
+        void setup() {
+            hasSetup = true;
+            setTransitions();
+            setActions();
         }
 
         /**
@@ -134,11 +143,7 @@ class State {
         /**
          * Virtual method for when he enters this state, perform specific actions for him.
          */
-        virtual void enter(T data) {
-            if(!hasSetup) {
-                setup();
-            }
-        }
+        virtual void enter(T data) = 0;
 
         /**
          * Virtual method for when he exits this state, perform specific actions for him.
@@ -156,15 +161,6 @@ class State {
         virtual void setTransitions() = 0;
 
     private:
-        /**
-         * Method for configuring actions and transitions.
-         */
-        void setup() {
-            hasSetup = true;
-            setTransitions();
-            setActions();
-        }
-
         bool isCurrentBehavior(Transition<T> *transition, StateMachine<T> &machine) {
             return transition->behaviors->has(machine.currentBehavior);
         }

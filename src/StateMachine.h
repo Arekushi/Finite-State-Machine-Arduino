@@ -1,6 +1,10 @@
 #ifndef Abstract_StateMachine_h
 #define Abstract_StateMachine_h
 
+#include <Arduino.h>
+#include <ArrayList.h>
+#include <Log.h>
+
 template <class T>
 class State;
 
@@ -14,14 +18,6 @@ class State;
 template<class T>
 class StateMachine {
 
-    private:
-        /**
-         * Pointer of the current state of the object that has State Machine.
-         */
-        State<T> *currentState;
-        
-        //State<T> *previousState;
-
     public:
         /**
          * Reference to the instance of the object that owns this State Machine.
@@ -29,6 +25,8 @@ class StateMachine {
         T &data;
 
         int *currentBehavior;
+
+        ArrayList<Log<T>> *logs;
 
         /**
          * State Machine constructor.
@@ -38,9 +36,9 @@ class StateMachine {
          * @param[out] initState object's initial state pointer.
          */
         StateMachine(T &data, State<T> *initState) : data(data) {
-            this->currentBehavior = 0;
-            currentState = initState;
-            currentState->enter(this->data);
+            currentBehavior = 0;
+            logs = new ArrayList<Log<T>>();
+            setCurrentState(initState);
         }
 
         /**
@@ -52,20 +50,26 @@ class StateMachine {
             return currentState;
         }
 
-        /*State<T> *getPreviousState() {
-            return previousState;
-        }*/
-
         /**
          * Method for setting a new state for the current state of the object.
          * 
          * @param[out] newState is a pointer from a new state to the current state.
          */
         void setCurrentState(State<T> *newState) {
-            currentState->exit(data);
-            //previousState = currentState;
+            if(logs->length() > 0) {
+                currentState->exit(data);
+                logs->last()->finish(millis());
+            }
+
             currentState = newState;
+
+
+            if(!currentState->hasSetup) {
+                currentState->setup();
+            }
+            
             currentState->enter(data);
+            logs->add(new Log<T>(currentState, millis()));
         }
 
         /**
@@ -95,6 +99,12 @@ class StateMachine {
         void updateBehavior(int *behavior) {
             currentBehavior = behavior;
         }
+
+    private:
+        /**
+         * Pointer of the current state of the object that has State Machine.
+         */
+        State<T> *currentState;
 };
 
 #endif

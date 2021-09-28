@@ -47,7 +47,79 @@ class ArrayList {
             m_length++;
         }
 
-        void remove(int *behavior) { }
+        T *pop() {
+            m_length--;
+
+            T **newData = new T*[m_length];
+            T *lastItem = m_data[m_length];
+
+            for(byte i = 0; i < m_length; i++) {
+                newData[i] = m_data[i];
+            }
+
+            delete[] m_data;
+            m_data = newData;
+            return lastItem;
+        }
+
+        T *shift() {
+            m_length--;
+
+            T **newData = new T*[m_length];
+            T *firstItem = m_data[0];
+
+            for(byte i = 1; i <= m_length; i++) {
+                newData[i] = m_data[i];
+            }
+
+            delete[] m_data;
+            m_data = newData;
+            return firstItem;
+        }
+
+        bool remove(int *element) {
+            byte index = indexOf(element);
+
+            if (index != -1) {
+                T **newData = new T*[m_length - 1];
+
+                byte count = 0;
+                for(byte i = 0; i < m_length; i++) {
+                    if(i != index) {
+                        newData[count] = m_data[i];
+                    }
+
+                    count++;
+                }
+
+                delete[] m_data;
+                m_data = newData;
+                m_length--;
+                return true;
+            }
+
+            return false;
+        }
+
+        bool slice(int start, int end) {
+            if(end > start) {
+                int length = start + end;
+                T **newData = new T*[length];
+
+                int count = 0;
+                for(byte i = start; i < end; i++) {
+                    newData[count] = m_data[i];
+                    count++;
+                }
+
+                delete[] m_data;
+                m_data = newData;
+                m_length = length;
+                return true;
+            }
+
+            return false;
+        }
 
         /**
          * Get method for the size of our list.
@@ -100,8 +172,16 @@ class ArrayList {
             return m_length > 0;
         }
 
-        bool isEmpty() {
+        bool empty() {
             return m_length == 0;
+        }
+
+        T *first() {
+            return m_data[0];
+        }
+
+        T *last() {
+            return m_data[m_length - 1];
         }
 };
 

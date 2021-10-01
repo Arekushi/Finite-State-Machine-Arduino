@@ -1,7 +1,8 @@
-#ifndef Abstract_StateMachine_h
-#define Abstract_StateMachine_h
+#ifndef Abstract_State_Machine_h
+#define Abstract_State_Machine_h
 
 #include <Arduino.h>
+#include <Behaviors.h>
 #include <ArrayList.h>
 #include <Log.h>
 
@@ -19,14 +20,7 @@ template<class T>
 class StateMachine {
 
     public:
-        /**
-         * Reference to the instance of the object that owns this State Machine.
-         */
-        T &data;
-
-        int *currentBehavior;
-
-        ArrayList<Log<T>> *logs;
+        bool log;
 
         /**
          * State Machine constructor.
@@ -35,19 +29,15 @@ class StateMachine {
          *  of the object that owns this State Machine.
          * @param[out] initState object's initial state pointer.
          */
-        StateMachine(T &data, State<T> *initState) : data(data) {
-            currentBehavior = 0;
-            logs = new ArrayList<Log<T>>();
-            setCurrentState(initState);
-        }
+        StateMachine(T &data, State<T> *initState, bool log = true) : m_data(data) {
+            m_currentBehavior = (int) Behaviors::STANDARD;
+            m_currentStateIndex = -1;
 
-        /**
-         * Get method for the current state of the object.
-         * 
-         * @return Returns the pointer of the object's current state.
-         */
-        State<T> *getCurrentState() {
-            return currentState;
+            m_checkpoints = new ArrayList<int>();
+            m_logs = new ArrayList<Log<T>>();
+            this->log = log;
+
+            setCurrentState(initState);
         }
 
         /**
@@ -56,20 +46,9 @@ class StateMachine {
          * @param[out] newState is a pointer from a new state to the current state.
          */
         void setCurrentState(State<T> *newState) {
-            if(logs->length() > 0) {
-                currentState->exit(data);
-                logs->last()->finish(millis());
-            }
-
-            currentState = newState;
-
-
-            if(!currentState->hasSetup) {
-                currentState->setup();
-            }
-            
-            currentState->enter(data);
-            logs->add(new Log<T>(currentState, millis()));
+            exitCurrentState();
+            m_currentState = newState;
+            enterCurrentState();
         }
 
         /**
@@ -81,7 +60,7 @@ class StateMachine {
          * @see executeState
          */
         void executeMachine() {
-            currentState->executeState(*this);
+            m_currentState->executeState(*this);
         }
 
         /**
@@ -96,15 +75,104 @@ class StateMachine {
             }
         }
 
-        void updateBehavior(int *behavior) {
-            currentBehavior = behavior;
+        void changeToReversed() {
+            currentBehavior((int) Behaviors::REVERSED);
+        }
+
+        void currentBehavior(int behavior) {
+            m_previousBehavior = m_currentBehavior;
+            m_currentBehavior = behavior;
+        }
+
+        int currentBehavior() {
+            return m_currentBehavior;
+        }
+
+        int previousBehavior() {
+            return m_previousBehavior;
+        }
+
+        void returnToPreviousBehavior() {
+            m_currentBehavior = m_previousBehavior;
+        }
+
+        int currentStateIndex() {
+            return m_currentStateIndex;
+        }
+
+        State<T> *currentState() {
+            return m_currentState;
+        }
+
+        ArrayList<Log<T>> *logs() {
+            return m_logs;
+        }
+
+        ArrayList<int> *checkpoints() {
+            return m_checkpoints;
+        }
+
+        void saveCheckpoint() {
+            m_checkpoints->add((int*) currentStateIndex());
+        }
+
+        T &data() {
+            return m_data;
+        }
+
+        bool isReversedBehavior() {
+            return currentBehavior() == (int) Behaviors::REVERSED;
+        }
+
+        bool arrivedCheckpoint() {
+            return (logs()->length() - 1) == reinterpret_cast<int>(checkpoints()->last());
         }
 
     private:
         /**
          * Pointer of the current state of the object that has State Machine.
          */
-        State<T> *currentState;
+        State<T> *m_currentState;
+
+        /**
+         * Reference to the instance of the object that owns this State Machine.
+         */
+        T &m_data;
+
+        int m_currentBehavior;
+
+        int m_previousBehavior;
+
+        int m_currentStateIndex;
+
+        ArrayList<int> *m_checkpoints;
+
+        ArrayList<Log<T>> *m_logs;
+
+        void exitCurrentState() {
+            if(m_currentStateIndex > 0) {
+                m_currentState->exit(m_data);
+
+                if(log && !isReversedBehavior()) {
+                    m_logs->last()->finish(millis());
+                }
+            }
+        }
+
+        void enterCurrentState() {
+            if(!m_currentState->hasSetup) {
+                m_currentState->setup();
+            }
+            
+            m_currentState->enter(m_data);
+            m_currentStateIndex++;
+
+            if(log && !isReversedBehavior()) {
+                m_logs->add(
+                    new Log<T>(m_currentState, millis())
+                );
+            }
+        }
 };
 
 #endif

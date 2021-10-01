@@ -10,7 +10,7 @@
 #include <ArrayList.h>
 
 /**
- * Class referring to a state of an object.
+ * Class referring to a state of an object. 
  * 
  * Abstract class, to create States for a given object,
  * having a set of actions and transitions itself.
@@ -47,6 +47,8 @@ class State {
          */
         const char *name;
 
+        State<T> *oppositeState;
+
         /**
          * State Constructor
          * 
@@ -64,7 +66,7 @@ class State {
         State() {
             hasSetup = false;
             actions = new ArrayList<Action<T>>();
-            transitions = new ArrayList<Transition<T>>(); 
+            transitions = new ArrayList<Transition<T>>();
         }
 
         /**
@@ -105,7 +107,7 @@ class State {
             Action<T> **array = actions->data();
 
             for(byte i = 0; i < actions->length(); i++) {
-                array[i]->execute(machine.data);
+                array[i]->execute(machine.data());
             }
         }
 
@@ -121,9 +123,23 @@ class State {
 
             for(byte i = 0; i < transitions->length(); i++) {
                 if(isCurrentBehavior(array[i], machine)) {
-                    const bool result = array[i]->getDecision()->decision(machine.data);
+                    const bool result = array[i]->getDecision()->decision(machine.data());
                     machine.transitionNextState(array[i]->getState(result));
                 }
+            }
+        }
+
+        void undo(StateMachine<T> &machine) {
+            if(!machine.arrivedCheckpoint()) {
+                Log<T> *log = machine.logs()->last();
+
+                if(millis() >= log->transitionTime()) {
+                    machine.logs()->pop();
+                    machine.transitionNextState(log->getOppositeState());
+                }
+            } else {
+                machine.checkpoints()->pop();
+                machine.returnToPreviousBehavior();
             }
         }
 
@@ -137,7 +153,12 @@ class State {
          */
         void executeState(StateMachine<T> &machine) {
             executeAction(machine);
-            checkTransitions(machine);
+
+            if(!machine.isReversedBehavior()) {
+                checkTransitions(machine);
+            } else {
+                undo(machine);
+            }
         }
 
         /**
@@ -162,7 +183,7 @@ class State {
 
     private:
         bool isCurrentBehavior(Transition<T> *transition, StateMachine<T> &machine) {
-            return transition->behaviors->has(machine.currentBehavior);
+            return transition->behaviors->has((int*) machine.currentBehavior());
         }
 };
 

@@ -2,6 +2,7 @@
 #define Monobehavior_h
 
 #include <ArrayList.h>
+#include <Behaviors.h>
 
 class Monobehavior {
     public:

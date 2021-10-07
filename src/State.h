@@ -47,7 +47,7 @@ class State {
          */
         const char *name;
 
-        State<T> *oppositeState;
+        State<T> *opposite;
 
         /**
          * State Constructor

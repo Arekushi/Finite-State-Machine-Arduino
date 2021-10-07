@@ -25,8 +25,8 @@ class Log {
         }
 
         State<T> *getOppositeState() {
-            return this->state->oppositeState == nullptr ?
-                this->state : this->state->oppositeState;
+            return this->state->opposite == nullptr ?
+                this->state : this->state->opposite;
         }
 
         unsigned long transitionTime() {

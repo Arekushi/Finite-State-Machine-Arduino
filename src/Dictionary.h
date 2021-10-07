@@ -23,7 +23,7 @@ class Dictionary {
 
         V *get(K *key) {
             for(byte i = 0; i < m_values->length(); i++) {
-                if(m_keys->data()[i] == key) {
+                if(strcmp(m_keys->data()[i], key) == 0) {
                     return m_values->data()[i];
                 }
             }

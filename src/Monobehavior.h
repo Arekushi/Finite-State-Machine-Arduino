@@ -9,7 +9,7 @@ class Monobehavior {
 
         Monobehavior() {
             this->behaviors = new ArrayList<int>();
-            this->behaviors->add(0);
+            this->behaviors->add((int*) Behaviors::STANDARD);
         }
 
         Monobehavior(ArrayList<int> *behaviors) {

@@ -21,8 +21,14 @@ class ArrayList {
         byte m_length = 0;
 
     public:
+        /**
+         * 
+         */
         ArrayList() { }
 
+        /**
+         * 
+         */
         ArrayList(T *elements[], byte size) {
             for(byte i = 0; i < size; i++) {
                 add(elements[i]);
@@ -47,6 +53,9 @@ class ArrayList {
             m_length++;
         }
 
+        /**
+         * 
+         */
         T *pop() {
             m_length--;
 
@@ -62,6 +71,9 @@ class ArrayList {
             return lastItem;
         }
 
+        /**
+         * 
+         */
         T *shift() {
             m_length--;
 
@@ -77,6 +89,9 @@ class ArrayList {
             return firstItem;
         }
 
+        /**
+         * 
+         */
         bool remove(int *element) {
             byte index = indexOf(element);
 
@@ -101,6 +116,9 @@ class ArrayList {
             return false;
         }
 
+        /**
+         * 
+         */
         bool slice(int start, int end) {
             if(end > start) {
                 int length = start + end;
@@ -148,6 +166,9 @@ class ArrayList {
             m_length = 0;
         }
 
+        /**
+         * 
+         */
         byte indexOf(T *element) {
             for(byte i = 0; i < m_length; i++) {
                 if(m_data[i] == element) {
@@ -158,6 +179,9 @@ class ArrayList {
             return -1;
         }
 
+        /**
+         * 
+         */
         bool has(T *element) {
             for(byte i = 0; i < m_length; i++) {
                 if(m_data[i] == element) {
@@ -168,18 +192,30 @@ class ArrayList {
             return false;
         }
 
+        /**
+         * 
+         */
         bool any() {
             return m_length > 0;
         }
 
+        /**
+         * 
+         */
         bool empty() {
             return m_length == 0;
         }
 
+        /**
+         * 
+         */
         T *first() {
             return m_data[0];
         }
 
+        /**
+         * 
+         */
         T *last() {
             return m_data[m_length - 1];
         }
